@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="lib/js/vue.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="lib/css/main.css">
+        <title>To do Liste</title>
+      </head>
+
+    <body>
+       
+     <header><div class="kopf"><h1>To do Liste von Juan Mejia</h1></div> </header> 
+      
+     <main id="aufgabenApp">
+
+        <h2>Alle Aufgaben</h2>
+        <ul>
+          <li class="alleaufgaben" v-for="(aufgabe, index) in aufgaben" :class="{ 'abgeschlossen' : aufgabe.stand}">
+            <p>{{aufgabe.beschreibung}}</p>
+          <button class="erledigtWechseln" @click="erledigtWechseln(index)">&#10003</button>
+          <button class="loeschen" @click="loeschen(index)">x</button>
+         
+        </li>
+       
+        </ul>
+
+        <p class="input">
+          <label for="neueAufgabe"></label>
+          <input id="neueAufgabe" 
+                 placeholder="Aufgabe hinzufügen" 
+                 v-model="neueAufgabe" 
+                 type="text"
+                 @keyup.enter="aufgabeHinzufuegen">
+          <button  class="hinzufuegen" 
+                   @click="aufgabeHinzufuegen"
+                   >+</button>
+        </p>
+
+        <h2>Noch tun: ({{ anzahlNichtErledigt }})</h2>
+<ul>
+    <li class="nochtun" v-for="aufgabe in nichtErledigt">
+        {{ aufgabe.beschreibung }}
+    </li>
+</ul>
+
+<h2>Erledigt: ({{ anzahlErledigt }})</h2>
+<ul>
+    <li class="erledigt" v-for="aufgabe in erledigt">
+        {{ aufgabe.beschreibung }}
+    </li>
+</ul>
+
+      </main>
+
+      <script src="lib/js/main.js"></script>
+    </body>
+
+</html>
